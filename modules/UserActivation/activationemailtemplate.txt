@@ -1,0 +1,9 @@
+Gracias por registrarte en nuestro Sistema de Turnos.<br><br>
+
+Para activar tu cuenta pulsa la siguiente liga y si no funciona trata de copiar en tu navegador la liga mencionada.
+<br><br>
+@serverpath/modules/UserActivation/activation.php?email=@email&#38;param=@token
+<br><br>
+Una vez activada tu cuenta podras tener acceso al sistema de turnos.
+<br><br>
+Gracias.

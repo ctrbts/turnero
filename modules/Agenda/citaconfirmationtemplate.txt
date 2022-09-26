@@ -1,0 +1,19 @@
+Gracias! Tu Turno se ha confirmado con exito.
+<br><br>
+Aqui esta la informacion de tu cita:
+<br><br>
+Numero de cita: @idcita <br><br>
+Dia: @dia <br><br>
+Horarios: @horarios <br><br>
+Nombre: @nombre <br><br>
+email: @email <br><br>
+<br><br>
+Para ver los datos de la cita verifica el siguiente link:
+<br><br>
+@link
+<br><br>
+Si deseas imprimir tu cita puedes realizarlo desde el siguiente enlace:
+<br><br>
+@print
+<br><br>
+Gracias!

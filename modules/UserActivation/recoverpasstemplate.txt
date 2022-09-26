@@ -1,0 +1,6 @@
+Saludos, Gracias por usar nuestro sistema de turnos.
+
+Para reiniciar tu contrase&ntilde;a se requiere que pulses la siguiente liga en caso de que no funcione, copia y pega en la direccion de
+tu navegador la siguiente liga:<br><br>
+
+@serverpath/modules/UserActivation/PassReset.php?e=@iduserencripted&email=@email
