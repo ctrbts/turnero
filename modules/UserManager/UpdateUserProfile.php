@@ -33,7 +33,7 @@ if(!empty($_POST)){
         if($_POST['token']==$UserToUpdate->activationtoken){
            $UserToUpdate->nombre=$_POST['nombre'];
            $UserToUpdate->apellidos=$_POST['apellidos'];
-           if(!$UserToUpdate->email=="admin@server.com" || !$UserToUpdate->email=="adminagenda@server.com"){
+           if(!$UserToUpdate->email=="admin@soporte.com" || !$UserToUpdate->email=="agenda@soporte.com"){
              $_ADOUser->UpdateUserProfile($UserToUpdate);
            }
 
@@ -44,7 +44,7 @@ if(!empty($_POST)){
            if(isset($_POST['password'])){
                if($_POST['password']!=""){
                 $UserToUpdate->password=$_POST['password'];
-                if($UserToUpdate->email!="admin@server.com" && !$UserToUpdate->email!="adminagenda@server.com"){
+                if($UserToUpdate->email!="admin@soporte.com" && !$UserToUpdate->email!="agenda@soporte.com"){
                     $_ADOUser->UpdatePassword($UserToUpdate);
                 }
                 if($debug){

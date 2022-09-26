@@ -76,7 +76,7 @@
                    <select id="Estado_SelOp">
                        <?php
                            echo '<option value="Todos" selected>Todos</option>';
-                           echo '<option value="0">Agendadas</option>';
+                           echo '<option value="0">Agendados</option>';
                             foreach($_ListOfStatus->array as $item){
                                 $idestatus= $item->idestatus;
                                 $estado=$item->estado;
@@ -91,7 +91,7 @@
     </div>
     <div class="p-3">
         <form id="form_110" class="table table-hover table-sm table-bordered"  method="post" action="UpdateDefaultProfile.php">
-               <h3>Total de Turnos Agendadas: <span id="countcitas"></span></h3>
+               <h3>Total de Turnos Agendados: <span id="countcitas"></span></h3>
                <table style="width: 100%" id="citastables">
                    <tr>
                        <th># Turno</th>

@@ -43,7 +43,7 @@ if(!empty($_SESSION)){
                 <p>Email: <?php echo $UserLogged->email?><input type="hidden" name="email" value="<?php echo $UserLogged->email?>" /></p>
                 <input type="hidden" name="token" value="<?php echo $UserLogged->activationtoken?>">
             </div>
-            <?php if($UserLogged->email!="admin@server.com" && $UserLogged->email!="adminagenda@server.com"){ ?>
+            <?php if($UserLogged->email!="admin@soporte.com" && $UserLogged->email!="agenda@soporte.com"){ ?>
                <h3>Cambiar Contraseña</h3>
                <div class="form-group">
                    <label class="form-label" for="password">Contraseña</label>

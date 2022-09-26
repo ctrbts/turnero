@@ -558,8 +558,8 @@ CREATE TABLE `t_users` (
 
 INSERT INTO `t_users` (`iduser`, `email`, `password`, `nombre`, `apellidos`, `active`, `idprofile`, `activationtoken`) VALUES
 (6, 'marco.cantu.g@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'Marco', 'Cantu', 1, 2, '4fbfb888c7235fce1abcc7d09dc60918'),
-(11, 'admin@server.com', '81dc9bdb52d04dc20036dbd8313ed055', 'Administrador', 'del Sistema', 1, 2, NULL),
-(12, 'adminagenda@server.com', '81dc9bdb52d04dc20036dbd8313ed055', 'Administrador', 'de Agenda', 1, 3, NULL);
+(11, 'admin@soporte.com', '81dc9bdb52d04dc20036dbd8313ed055', 'Administrador', 'del Sistema', 1, 2, NULL),
+(12, 'agenda@soporte.com', '81dc9bdb52d04dc20036dbd8313ed055', 'Administrador', 'de Agenda', 1, 3, NULL);
 
 -- --------------------------------------------------------
 

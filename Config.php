@@ -19,42 +19,21 @@
  */
 
 /**
- * Description of ArrayList
+ * Description of Config
  *
  * @author Fernando Merlo
  */
-class ListArray {
-     var $array;
-
-    public function ArrayList() {
-      $this->array = array();
-    }
-
-    public function addItem($item){
-      $this->array[] = $item ;
-    }
-
-    public function toString(){
-      $cadena = "";
-      foreach ($this->array as $item) {
-        $cadena .= $item;
-      }
-      return $cadena;
-    }
-
-    public function delete($item){
-      unset($this->array[$item]);
-    }
-
-    public function item($item){
-      return $this->array[$item];
-    }
-
-    public function size(){
-      $size = 0;
-      foreach ($this->array as $item) {
-        $size++;
-      }
-      return $size;
-    }
+class Config {
+    public $username="root";
+    public $password="";
+    public $database="turnos";
+    public $servername="localhost";
+    public $pathServer= "folp_turnero";
+    public $domain="http://localhost";
+    public $smtpHost="smtp.gmail.com";
+    public $smtpAuth=true;
+    public $smtpUserName="code4odonto@gmail.com";
+    public $smtpPassword="maotzhqupoqxoefu";
+    public $smtpPort=465;
+    public $smtpFrom="code4odonto@gmail.com";
 }

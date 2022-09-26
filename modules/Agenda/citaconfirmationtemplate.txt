@@ -1,19 +1,21 @@
-Gracias! Tu Turno se ha confirmado con exito.
-<br><br>
-Aqui esta la informacion de tu cita:
-<br><br>
-Numero de cita: @idcita <br><br>
-Dia: @dia <br><br>
-Horarios: @horarios <br><br>
-Nombre: @nombre <br><br>
-email: @email <br><br>
-<br><br>
-Para ver los datos de la cita verifica el siguiente link:
-<br><br>
+<h2 class="text-danger">Su turno se ha confirmado con exito.</h2>
+<br>
+<h4 class="text-primary">Información del turno:</h4>
+<br>
+<b>Turno nº</b> @idcita <br>
+<b>Dia:</b> @dia <br>
+<b>Hora:</b> @horarios <br>
+<b>Paciente:</b> @nombre <br>
+<b>E-mail:</b> @email <br>
+<br>
+<hr>
+Para ver los detales de su turno en linea, puede hacer click en el siguiente enlace:
+<br>
 @link
 <br><br>
-Si deseas imprimir tu cita puedes realizarlo desde el siguiente enlace:
-<br><br>
+Si deseas imprimir su turno puede realizarlo desde el siguiente enlace:
+<br>
 @print
 <br><br>
-Gracias!
+<hr>
+<h6>Facultad de Odontología U.N.L.P.</h6>

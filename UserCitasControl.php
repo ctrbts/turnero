@@ -77,23 +77,26 @@ if (!empty($_SESSION['UserObj'])) {
 
 <!-- Tablero Publico -->
 <?php if ($SessionUser->idprofile == EUserProfile::PublicUser) { ?>
-    <div>
-        <div class="p-3">
-            <h2>Bienvenido a tu agenda elect&oacute;rnica</h2>
-            <p>&nbsp;Programaci&oacute;n de agenda</p>
+    <div class="container-fluid">
+        <div class="pt-5">
+            <h2>Sistema de turnos en línea</h2>
+            <h5>Hospital Odontológico Universitario</h5>
         </div>
-        <div class="text-left p-3">
+        <div class="p-5">
+            <a class="btn btn-lg btn-primary shadow text-white" href="./modules/Agenda/ViewAgenda.php">Solicitar un nuevo turno</a>
+        </div>
+        <div class="text-left p-5">
             <div class="row">
-                <div class="col-md ml-3 border-right">
+                <div class="col-lg">
                     <?php
                     if (count($SessionUser->ListOfCitas->array) == 0) {
                         echo '<span class="h5">No se encontraron turnos.</span>';
                     }
 
-                    //Turnos Agendadas
+                    //Turnos Agendados
                     if (count($ListCitasAgendadas->array) > 0) {
                         echo '<div class="pb-3">';
-                        echo '<h3>Turnos Agendadas</h3>';
+                        echo '<h3 class="mb-4">Turnos Agendados</h3>';
                         foreach ($ListCitasAgendadas->array as $item) {
                             $hr_inicio = $item->getHrInicio();
                             $hr_fin =   $item->getHrFin();
@@ -135,10 +138,10 @@ if (!empty($_SESSION['UserObj'])) {
                     }
 
 
-                    //Turnos Canceladas
+                    //Turnos Cancelados
                     if (count($ListCitasCanceladas->array) > 0) {
                         echo '<div class="pb-3">';
-                        echo '<h3>Turnos Canceladas</h3>';
+                        echo '<h3>Turnos Cancelados</h3>';
                         $showrows = 5;
                         $index = 0;
                         foreach ($ListCitasCanceladas->array as $item) {
@@ -178,33 +181,27 @@ if (!empty($_SESSION['UserObj'])) {
                     }
                     ?>
                 </div>
-                <div class="col-lg ">
-                    <div class="p-3">
-                        <span class="display-4">
-                            Aviso de turnos
-                        </span>
-                        <p class="lead">
-                            Es esta seccion puede colocar algun aviso, o alguna recomendacion para el usuario.
-                        </p>
-                        <div>
-                            <video width="100%" controls>
-                                <source src="movie.mp4" type="video/mp4">
-                                <source src="movie.ogg" type="video/ogg">
-                                Your browser does not support the video tag.
-                            </video>
-                        </div>
-                        <p class="lead mt-3">
-                            Gracias por usar este programa.
-                        </p>
-                    </div>
+
+                <div class="col-md">
+                    <span class="display-4">
+                        Espacio de publicidad
+                    </span>
+                    <p class="lead">
+                        Es esta seccion puede colocar algun aviso, o alguna recomendacion para el paciente.
+                    </p>
+                    <video width="100%" controls>
+                        <source src="movie.mp4" type="video/mp4">
+                        <source src="movie.ogg" type="video/ogg">
+                        Your browser does not support the video tag.
+                    </video>
                 </div>
             </div>
         </div>
     </div>
 <?php } ?>
+
 <!-- Tablero administrador -->
 <?php if ($SessionUser->idprofile == EUserProfile::Adminsirtator || $SessionUser->idprofile == EUserProfile::AgendaManager) { ?>
-
     <div>
         <div class="pt-3">
             <h2>Agenda el&eacute;ctronica</h2>
@@ -221,7 +218,7 @@ if (!empty($_SESSION['UserObj'])) {
                         <th scope="col">Estado</th>
                         <th scope="col">Opciones</th>
                     </tr>
-                    <!-- Contenido turnos agendadas -->
+                    <!-- Contenido turnos Agendados -->
                     <?php
                     foreach ($ListCitas->array as $cita) {
                         $hr_inicio = $cita->getHrInicio();
@@ -336,7 +333,7 @@ if (!empty($_SESSION['UserObj'])) {
                                 Total de Turnos Atendidas: <?php echo $TotalCitasAtendidas ?>
                             </li>
                             <li>
-                                Total de Turnos Canceladas: <?php echo $TotalCitasCanceladas ?>
+                                Total de Turnos Cancelados: <?php echo $TotalCitasCanceladas ?>
                             </li>
                         </ul>
                     </div>
@@ -353,6 +350,7 @@ if (!empty($_SESSION['UserObj'])) {
 <div id="dialog-cancel" title="Mensaje de Sistema">
     <p>¿Desea Cancelar la Turno Selecionada?</p>
 </div>
+
 <script>
     var idselected;
     $("button[id*='btn_view_']").click(function() {

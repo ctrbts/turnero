@@ -24,9 +24,9 @@ $year = date('Y', $fecha);
 
 <div>
     <div class="m-3">
-        <span class="display-4">Agende su turno</span>
+        <span class="display-4">Agenda de turnos</span>
     </div>
-    <div class="mt-3 mb-1">
+    <div class="mt-3">
         <span class="lead">Calendario de turnos disponibles</span>
     </div>
     <div class="table-responsive" id="calendar-max">
@@ -34,8 +34,8 @@ $year = date('Y', $fecha);
             <div>
                 <table style="width: 100%" id="controlbuttons">
                     <tr>
-                        <td class="text-left py-2"><a class="btn bn-sm btn-primary" href="prevmonth">Mes Anterior</a></td>
-                        <td class="text-right py-2"><a class="btn bn-sm btn-primary" href="nextmonth">Siguiente Mes</a></td>
+                        <td class="text-left p-1"><a class="btn bn-sm btn-success" href="prevmonth">Mes Anterior</a></td>
+                        <td class="text-right p-1"><a class="btn bn-sm btn-success" href="nextmonth">Siguiente Mes</a></td>
                     </tr>
                 </table>
             </div>
