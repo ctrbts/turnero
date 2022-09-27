@@ -67,7 +67,7 @@ foreach($Formas->array as $item){
 <?php  $HtmlViewsController->IncludeViews(array("HtmlBody"));?>
 <?php include ("../../inModuleMenu.php"); ?>
 <!-- Content -->
-<div class="bg bg-white border border-dark">
+<div class="p-3">
     <div class="mt-3 mb-3">
         <span class="display-4">Requisitos de Turno</span>
     </div>

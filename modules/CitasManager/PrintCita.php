@@ -19,166 +19,167 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 <?php
 include 'topInclude.php';
 $_DateFunctions = new DateFunctions();
-$commonfuncions= new CommonFunctions();
-if(isset($_GET)){
-    if(isset($_GET['k'])){
-        $id=  base64_decode($_GET['k']);
+$commonfuncions = new CommonFunctions();
+if (isset($_GET)) {
+    if (isset($_GET['k'])) {
+        $id =  base64_decode($_GET['k']);
 
         //Carga los datos de la cita
-        $LoadedCita= new CitasObj();
-        $LoadedCita->idcita=  $id;
-        $_ADOCitas= new ADOCitas();
+        $LoadedCita = new CitasObj();
+        $LoadedCita->idcita =  $id;
+        $_ADOCitas = new ADOCitas();
         $_ADOCitas->getCitabyID($LoadedCita);
-        $daytitle= $_DateFunctions->getSpanishLongDate($LoadedCita->mes, $LoadedCita->dia, $LoadedCita->anio);
+        $daytitle = $_DateFunctions->getSpanishLongDate($LoadedCita->mes, $LoadedCita->dia, $LoadedCita->anio);
         $LoadedCita->getEstatus();
-        $EstatusCita=$LoadedCita->EstatusCitaObj->estado;
+        $EstatusCita = $LoadedCita->EstatusCitaObj->estado;
         $LoadedCita->GetFormas();
-        foreach($LoadedCita->FormasCollection->array as $forma){
+        foreach ($LoadedCita->FormasCollection->array as $forma) {
             $forma->GetCamposDeForma();
         }
 
         //Carga Usuario que creo la forma
         $LoadedCita->getUserObj();
 
-
         //forma la liga deacuerdo a la configuracion
         $config = new Config();
-        $linkcita= $config->domain."/".$config->pathServer."/modules/CitasManager/viewCita.php?param=".$_GET['k'];
+        $linkcita = $config->domain . "/" . $config->pathServer . "/modules/CitasManager/viewCita.php?param=" . $_GET['k'];
 
         //Configura el nombre de la imagen QR
-        $QRcodeImg = "../../images/qrcita_".$id.".png";
+        $QRcodeImg = "../../images/qrcita_" . $id . ".png";
     }
 }
 
 ?>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <style>
-            body{
-                background-color: white;
-                font-family:"Lucida Grande", Tahoma, Arial, Verdana, sans-serif;
-            }
-            .container{
-                display: flex;
-            }
-            .fixed{
-                width: 373px;
 
-                padding-top: 5%
-            }
-            .flex-item{
-                flex-grow: 1;
-                padding-left: 15px;
-                padding-top: 15px;
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            background-color: white;
+            font-family: "Open Sans", "Lucida Grande", Tahoma, Arial, Verdana, sans-serif;
+        }
 
-                text-align: left;
-            }
-            .maincontent{
-                width: 750px;
+        .container {
+            display: flex;
+        }
 
-            }
-            ul
-            {
-                    font-size:100%;
-                    list-style-type:none;
-                    margin:0;
-                    padding:0;
-                    width:100%;
-            }
+        .fixed {
+            width: 373px;
 
-            li
-            {
-                    display:block;
-                    margin:0;
-                    padding:4px 5px 2px 9px;
-                    position:relative;
-            }
-        </style>
-        <title></title>
-    </head>
-    <body>
-        <div class="maincontent">
+            padding-top: 5%
+        }
+
+        .flex-item {
+            flex-grow: 1;
+            padding-left: 15px;
+            padding-top: 15px;
+            text-align: left;
+        }
+
+        .maincontent {
+            width: 750px;
+
+        }
+
+        ul {
+            font-size: 100%;
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+        }
+
+        li {
+            display: block;
+            margin: 0;
+            padding: 4px 5px 2px 9px;
+            position: relative;
+        }
+    </style>
+    <title></title>
+</head>
+
+<body>
+    <div class="maincontent">
         <?php
-            $LogoImageConf = new SystemConfObj();
-            $LogoImageConf->variable="LogoImageFile";
+        $LogoImageConf = new SystemConfObj();
+        $LogoImageConf->variable = "LogoImageFile";
 
-            $ADOSystemConf = new ADOSystemConf();
-            $ADOSystemConf->GetVariableByName($LogoImageConf);
+        $ADOSystemConf = new ADOSystemConf();
+        $ADOSystemConf->GetVariableByName($LogoImageConf);
 
-            $TitleConf = new SystemConfObj();
-            $TitleConf->variable= "PublicMainHeader";
+        $TitleConf = new SystemConfObj();
+        $TitleConf->variable = "PublicMainHeader";
 
-            $ADOSystemConf->GetVariableByName($TitleConf);
-
+        $ADOSystemConf->GetVariableByName($TitleConf);
         ?>
         <?php
-            if(!empty($LogoImageConf->idvariable) && !empty($TitleConf->idvariable)){
-                $Configuration = new Config();
-                $img = $Configuration->domain."/".$Configuration->pathServer."/images/".$LogoImageConf->valor;
+        if (!empty($LogoImageConf->idvariable) && !empty($TitleConf->idvariable)) {
+            $Configuration = new Config();
+            $img = $Configuration->domain . "/" . $Configuration->pathServer . "/images/" . $LogoImageConf->valor;
         ?>
-        <div style="text-align: left;padding-left: 30px;" >
+            <div style="text-align: left;padding-left: 30px;">
+                <center>
+                    <img style="height: 80px; width: 150px;" align="middle" src="<?php echo $img; ?>" />
+                    <?php echo $TitleConf->valor; ?>
+                </center>
+            </div>
+        <?php
+        }
+        ?>
+    </div>
+    <div class="container">
+        <div class="fixed">
             <center>
-            <img style="height: 80px; width: 150px;"  align="middle" src="<?php echo $img;?>" />
-            <?php echo $TitleConf->valor;?>
+                <?php
+                QRcode::png($linkcita, $QRcodeImg, "L", 4, 2);
+                echo '<img src="' . $QRcodeImg . '" />';
+
+                //rebuild cache
+                QRtools::buildCache();
+                ?>
             </center>
         </div>
-        <?php
-            }
-        ?>
-        </div>
-        <div class="container">
-            <div class="fixed">
-                <center>
+        <div class="flex-item">
+            <h2>Informaci&oacute;n de tu Turno:</h2>
+            <h2>Turno No. <?php echo $LoadedCita->idcita; ?></h2>
+            <ul>
+                <il>
+                    <label>Usario :</label><strong><?php echo $LoadedCita->UserObj->nombre . " " . $LoadedCita->UserObj->apellidos ?></strong>
+                    <li>Fecha : <strong><?php echo $daytitle; ?></strong></li>
+                    <li>Horario : <strong><?php echo $LoadedCita->getHrInicio() . "- " . $LoadedCita->getHrFin(); ?></strong></li>
+                </il>
+                <p>&nbsp;&nbsp;&nbsp;Estado: <?php echo $EstatusCita; ?></p>
+            </ul>
+            <div>
                 <?php
-                        QRcode::png($linkcita,$QRcodeImg,"L",4,2);
-                        echo '<img src="'.$QRcodeImg.'" />';
-
-                        //rebuild cache
-                        QRtools::buildCache();
+                foreach ($LoadedCita->FormasCollection->array as $forma) {
                 ?>
-                    </center>
-            </div>
-            <div class="flex-item">
-                <h2>Informaci&oacute;n de tu Turno:</h2>
-                <h2>Turno No. <?php echo $LoadedCita->idcita;?></h2>
-                <ul>
-                    <il>
-                        <label>Usario :</label><strong><?php echo $LoadedCita->UserObj->nombre." ".$LoadedCita->UserObj->apellidos?></strong>
-                        <li>Fecha : <strong><?php echo $daytitle; ?></strong></li>
-                        <li>Horario : <strong><?php echo $LoadedCita->getHrInicio(). "- ". $LoadedCita->getHrFin() ; ?></strong></li>
-                    </il>
-                     <p>&nbsp;&nbsp;&nbsp;Estado: <?php echo $EstatusCita;?></p>
-                </ul>
-                <div>
-               <?php
-                    foreach($LoadedCita->FormasCollection->array as $forma){
-
-               ?>
-               <h2><?php echo $forma->descripcion;?></h2>
-               <ul >
-               <?php
-                        foreach($forma->CamposFormaCollection->array as $campos){
+                    <h2><?php echo $forma->descripcion; ?></h2>
+                    <ul>
+                        <?php
+                        foreach ($forma->CamposFormaCollection->array as $campos) {
                             $campos->GetValorObj();
-                            if(!empty($campos->ValorCampoFormaObj->valor)){
-               ?>
-                   <li>
-                       <label><?php echo $campos->nombre;?></label> : <?php echo $campos->ValorCampoFormaObj->valor ?>
-                   </li>
-               <?php
-
+                            if (!empty($campos->ValorCampoFormaObj->valor)) {
+                        ?>
+                                <li>
+                                    <label><?php echo $campos->nombre; ?></label> : <?php echo $campos->ValorCampoFormaObj->valor ?>
+                                </li>
+                        <?php
                             }
                         }
-               ?>
-               </ul>
-               <?php
-                    }
-               ?>
-           </div>
+                        ?>
+                    </ul>
+                <?php
+                }
+                ?>
             </div>
         </div>
-        <script type="text/javascript">
-            window.print();
-        </script>
-    </body>
+    </div>
+    <script type="text/javascript">
+        window.print();
+    </script>
+</body>
+
 </html>

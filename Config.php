@@ -24,12 +24,23 @@
  * @author Fernando Merlo
  */
 class Config {
+    // to production
+    /* public $username="admin";
+    public $password="admin_pasS";
+    public $database="turnos";
+    public $servername="163.10.29.5";
+    public $pathServer= "turnero";
+    public $domain="http://sistemas.folp.unlp.edu.ar"; */
+
+    // to development
     public $username="root";
     public $password="";
     public $database="turnos";
     public $servername="localhost";
     public $pathServer= "folp_turnero";
     public $domain="http://localhost";
+
+    // smtp config
     public $smtpHost="smtp.gmail.com";
     public $smtpAuth=true;
     public $smtpUserName="code4odonto@gmail.com";

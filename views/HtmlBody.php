@@ -13,7 +13,6 @@
 ?>
 </head>
 <body id="main_body">
-
     <div class="text-center">
 
 <?php

@@ -202,16 +202,16 @@ if (!empty($_SESSION['UserObj'])) {
 
 <!-- Tablero administrador -->
 <?php if ($SessionUser->idprofile == EUserProfile::Adminsirtator || $SessionUser->idprofile == EUserProfile::AgendaManager) { ?>
-    <div>
-        <div class="pt-3">
-            <h2>Agenda el&eacute;ctronica</h2>
-            <p>&nbsp;Programaci&oacute;n de agenda</p>
+    <div class="container-fluid">
+        <div class="pt-5">
+            <h1>Agenda de turnos</h1>
+            <p>Estado de los turnos agendados</p>
         </div>
-        <div class="p-3 table-responsive">
+        <div class="p-5 table-responsive">
             <table class="table table-sm table-hover table-striped table-bordered" id="">
                 <tbody>
                     <tr>
-                        <th scope="col"># Turno</th>
+                        <th scope="col">#</th>
                         <th scope="col">Fecha</th>
                         <th scope="col">Horario</th>
                         <th scope="col">Nombre de Usuario</th>
@@ -227,7 +227,6 @@ if (!empty($_SESSION['UserObj'])) {
                         $cita->getUserObj();
                         $cita->getEstatus();
                         $_idcita =  base64_encode($cita->idcita);
-
                     ?>
                         <tr>
                             <td><?php echo $cita->idcita ?></td>
@@ -236,10 +235,10 @@ if (!empty($_SESSION['UserObj'])) {
                             <td><?php echo $cita->UserObj->nombre . " " . $cita->UserObj->apellidos ?></td>
                             <td><?php echo $cita->EstatusCitaObj->estado ?></td>
                             <td>
-                                <button type="button" class="btn btn-sm btn-primary mb-2" id="btn_view_<?php echo  $_idcita ?>">Ver</button>
+                                <button type="button" class="btn btn-sm btn-success" id="btn_view_<?php echo  $_idcita ?>">Mostrar</button>
                                 <?php if ($cita->idestatus == EStatusCita::Agendada) { ?>
-                                    <button type="button" class="btn btn-sm btn-success mb-2" id="btn_close_<?php echo  $_idcita ?>">Cerrar</button>
-                                    <button type="button" class="btn btn-sm btn-danger mb-2" id="btn_cancel_<?php echo  $_idcita ?>">Cancelar</button>
+                                    <button type="button" class="btn btn-sm btn-warning" id="btn_close_<?php echo  $_idcita ?>">Finalizar</button>
+                                    <button type="button" class="btn btn-sm btn-danger" id="btn_cancel_<?php echo  $_idcita ?>">Cancelar</button>
                                 <?php } ?>
                             </td>
                         </tr>
@@ -252,91 +251,87 @@ if (!empty($_SESSION['UserObj'])) {
             Paginas
             <?php include('htmlcontrols/HtmlPagingControl.class.php') ?>
         </div>
-        <!-- Control de usuarios registrados -->
-        <div class="mt-2">
-            <div class="row p-3">
-                <div class="col">
-                    <div>
-                        <span class="h4">Ultimos Usuarios Registrados</span>
-                    </div>
-                    <div class="table-responsive" id="">
-                        <table class="table table-sm table-hover table-striped table-bordered" id="">
-                            <tbody>
-                                <tr>
-                                    <th scope="col">Usuario</th>
-                                    <th scope="col">Email</th>
-                                    <th scope="col">Estado</th>
-                                    <th scope="col">Opciones</th>
-                                </tr>
-                                <?php
-                                $TotalRecordsUser = (count($ListUsers->array) < 10) ? count($ListUsers->array) : 10;
 
-                                for ($i = 0; $i <= ($TotalRecordsUser - 1); $i++) {
-                                    $userObj = new UserObj();
-                                    $userObj = $ListUsers->array[$i];
-                                ?>
-                                    <tr>
-                                        <td><?php echo $userObj->nombre . " " . $userObj->apellidos ?></td>
-                                        <td><?php echo $userObj->email ?></td>
-                                        <td><?php echo ($userObj->active == EActivate::Activo) ? "Activo" : "No Activo" ?></td>
-                                        <td>
-                                            <?php if ($userObj->active == EActivate::Activo) { ?>
-                                                <button type="button" class="btn btn-danger btn-sm" id="btn_deactivate_<?php echo $userObj->email ?>_<?php echo $userObj->activationtoken ?>">Desactivar</button>
-                                            <?php } ?>
-                                            <?php if ($userObj->active == EActivate::Inactivo) { ?>
-                                                <button type="button" class="btn btn-success btn-sm" id="btn_activate_<?php echo $userObj->email ?>_<?php echo $userObj->activationtoken ?>">Activar</button>
-                                            <?php } ?>
-                                        </td>
-                                    </tr>
-                                <?php } ?>
+        <!-- Control de usuarios registrados -->
+        <div class="row p-5">
+            <div class="card shadow-sm col-md-7 col-sm-12">
+                <div class="card-header">
+                    Ultimos usuarios / pacientes registrados
+                </div>
+                <div class="card-body">
+                    <table class="table table-sm table-hover table-striped table-bordered table-responsive">
+                        <tbody>
+                            <tr>
+                                <th scope="col">Usuario / Paciente</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Estado</th>
+                                <th scope="col">Opciones</th>
+                            </tr>
+                            <?php
+                            $TotalRecordsUser = (count($ListUsers->array) < 10) ? count($ListUsers->array) : 10;
+
+                            for ($i = 0; $i <= ($TotalRecordsUser - 1); $i++) {
+                                $userObj = new UserObj();
+                                $userObj = $ListUsers->array[$i];
+                            ?>
                                 <tr>
-                                    <td colspan="4" class="text-right p-3">
-                                        <button type="button" class="btn btn-primary btn-sm" id="btn_users_more"> Ver mas.</button>
+                                    <td><?php echo $userObj->nombre . " " . $userObj->apellidos ?></td>
+                                    <td><?php echo $userObj->email ?></td>
+                                    <td><?php echo ($userObj->active == EActivate::Activo) ? "Activo" : "No Activo" ?></td>
+                                    <td>
+                                        <?php if ($userObj->active == EActivate::Activo) { ?>
+                                            <button type="button" class="btn btn-danger btn-sm" id="btn_deactivate_<?php echo $userObj->email ?>_<?php echo $userObj->activationtoken ?>">Desactivar</button>
+                                        <?php } ?>
+                                        <?php if ($userObj->active == EActivate::Inactivo) { ?>
+                                            <button type="button" class="btn btn-success btn-sm" id="btn_activate_<?php echo $userObj->email ?>_<?php echo $userObj->activationtoken ?>">Activar</button>
+                                        <?php } ?>
                                     </td>
                                 </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+                    <button type="button" class="btn btn-primary btn-sm" id="btn_users_more"> Ver todos los usuarios / pacientes</button>
                 </div>
-                <!-- Seccion de contadores -->
-                <div class="col">
-                    <div class="mb-3">
-                        <span class="h3">Estadisticas de usuarios</span>
-                    </div>
-                    <div class="pl-5 text-left">
-                        <?php
-                        $ADOUsers->debug = false;
-                        $TotalRegisteredUSers = $ADOUsers->CountUsersRegisterd(null);
-                        $TotalInactiveUsers = $ADOUsers->CountUsersRegisterd("active=0");
-                        $TotalCitasActivas = $ADOCitas->CountCitas("idestatus=" . EStatusCita::Agendada);
-                        $TotalCitasAtendidas = $ADOCitas->CountCitas("idestatus=" . EStatusCita::Atendida);
-                        $TotalCitasCanceladas = $ADOCitas->CountCitas("idestatus=" . EStatusCita::Cancelada);
-                        ?>
-                        <ul>
-                            <li>
-                                Total de Usuarios Registrados: <?php echo $TotalRegisteredUSers ?>
-                            </li>
-                            <li>
-                                Total de Usuarios Inactivos: <?php echo $TotalInactiveUsers ?>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="mb-3">
-                        <span class="h3">Estadisticas de de Turnos</span>
-                    </div>
-                    <div class="pl-5 text-left">
-                        <ul>
-                            <li>
-                                Total de Turnos por Atender: <?php echo $TotalCitasActivas ?>
-                            </li>
-                            <li>
-                                Total de Turnos Atendidas: <?php echo $TotalCitasAtendidas ?>
-                            </li>
-                            <li>
-                                Total de Turnos Cancelados: <?php echo $TotalCitasCanceladas ?>
-                            </li>
-                        </ul>
-                    </div>
+            </div>
+
+            <!-- Seccion de contadores -->
+            <div class="col-md-5 col-sm-12">
+                <div class="mb-3">
+                    <span class="h3">Estadisticas de usuarios</span>
+                </div>
+                <div class="pl-5 text-left">
+                    <?php
+                    $ADOUsers->debug = false;
+                    $TotalRegisteredUSers = $ADOUsers->CountUsersRegisterd(null);
+                    $TotalInactiveUsers = $ADOUsers->CountUsersRegisterd("active=0");
+                    $TotalCitasActivas = $ADOCitas->CountCitas("idestatus=" . EStatusCita::Agendada);
+                    $TotalCitasAtendidas = $ADOCitas->CountCitas("idestatus=" . EStatusCita::Atendida);
+                    $TotalCitasCanceladas = $ADOCitas->CountCitas("idestatus=" . EStatusCita::Cancelada);
+                    ?>
+                    <ul>
+                        <li>
+                            Total de Usuarios Registrados: <?php echo $TotalRegisteredUSers ?>
+                        </li>
+                        <li>
+                            Total de Usuarios Inactivos: <?php echo $TotalInactiveUsers ?>
+                        </li>
+                    </ul>
+                </div>
+                <div class="mb-3">
+                    <span class="h3">Estadisticas de de Turnos</span>
+                </div>
+                <div class="pl-5 text-left">
+                    <ul>
+                        <li>
+                            Total de Turnos por Atender: <?php echo $TotalCitasActivas ?>
+                        </li>
+                        <li>
+                            Total de Turnos Atendidas: <?php echo $TotalCitasAtendidas ?>
+                        </li>
+                        <li>
+                            Total de Turnos Cancelados: <?php echo $TotalCitasCanceladas ?>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -345,10 +340,10 @@ if (!empty($_SESSION['UserObj'])) {
 
 <!-- Cuadros de dialogos -->
 <div id="dialog-confirm" title="Mensaje de Sistema">
-    <p>¿Desea Cerrar la Turno Selecionada?</p>
+    <p>¿Desea finalizar el turno selecionado?</p>
 </div>
 <div id="dialog-cancel" title="Mensaje de Sistema">
-    <p>¿Desea Cancelar la Turno Selecionada?</p>
+    <p>¿Desea cancelar el turno selecionado?</p>
 </div>
 
 <script>
