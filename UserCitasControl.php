@@ -254,44 +254,42 @@ if (!empty($_SESSION['UserObj'])) {
 
         <!-- Control de usuarios registrados -->
         <div class="row p-5">
-            <div class="card shadow-sm col-md-7 col-sm-12">
-                <div class="card-header">
+            <div class="col-md-7 col-sm-12">
+                <h4 class="mb-3">
                     Ultimos usuarios / pacientes registrados
-                </div>
-                <div class="card-body">
-                    <table class="table table-sm table-hover table-striped table-bordered table-responsive">
-                        <tbody>
-                            <tr>
-                                <th scope="col">Usuario / Paciente</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">Estado</th>
-                                <th scope="col">Opciones</th>
-                            </tr>
-                            <?php
-                            $TotalRecordsUser = (count($ListUsers->array) < 10) ? count($ListUsers->array) : 10;
+                </h4>
+                <table class="table table-sm table-hover table-striped table-bordered">
+                    <tbody>
+                        <tr>
+                            <th scope="col">Usuario / Paciente</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Estado</th>
+                            <th scope="col">Opciones</th>
+                        </tr>
+                        <?php
+                        $TotalRecordsUser = (count($ListUsers->array) < 10) ? count($ListUsers->array) : 10;
 
-                            for ($i = 0; $i <= ($TotalRecordsUser - 1); $i++) {
-                                $userObj = new UserObj();
-                                $userObj = $ListUsers->array[$i];
-                            ?>
-                                <tr>
-                                    <td><?php echo $userObj->nombre . " " . $userObj->apellidos ?></td>
-                                    <td><?php echo $userObj->email ?></td>
-                                    <td><?php echo ($userObj->active == EActivate::Activo) ? "Activo" : "No Activo" ?></td>
-                                    <td>
-                                        <?php if ($userObj->active == EActivate::Activo) { ?>
-                                            <button type="button" class="btn btn-danger btn-sm" id="btn_deactivate_<?php echo $userObj->email ?>_<?php echo $userObj->activationtoken ?>">Desactivar</button>
-                                        <?php } ?>
-                                        <?php if ($userObj->active == EActivate::Inactivo) { ?>
-                                            <button type="button" class="btn btn-success btn-sm" id="btn_activate_<?php echo $userObj->email ?>_<?php echo $userObj->activationtoken ?>">Activar</button>
-                                        <?php } ?>
-                                    </td>
-                                </tr>
-                            <?php } ?>
-                        </tbody>
-                    </table>
-                    <button type="button" class="btn btn-primary btn-sm" id="btn_users_more"> Ver todos los usuarios / pacientes</button>
-                </div>
+                        for ($i = 0; $i <= ($TotalRecordsUser - 1); $i++) {
+                            $userObj = new UserObj();
+                            $userObj = $ListUsers->array[$i];
+                        ?>
+                            <tr>
+                                <td><?php echo $userObj->nombre . " " . $userObj->apellidos ?></td>
+                                <td><?php echo $userObj->email ?></td>
+                                <td><?php echo ($userObj->active == EActivate::Activo) ? "Activo" : "No Activo" ?></td>
+                                <td>
+                                    <?php if ($userObj->active == EActivate::Activo) { ?>
+                                        <button type="button" class="btn btn-danger btn-sm" id="btn_deactivate_<?php echo $userObj->email ?>_<?php echo $userObj->activationtoken ?>">Desactivar</button>
+                                    <?php } ?>
+                                    <?php if ($userObj->active == EActivate::Inactivo) { ?>
+                                        <button type="button" class="btn btn-success btn-sm" id="btn_activate_<?php echo $userObj->email ?>_<?php echo $userObj->activationtoken ?>">Activar</button>
+                                    <?php } ?>
+                                </td>
+                            </tr>
+                        <?php } ?>
+                    </tbody>
+                </table>
+                <button type="button" class="btn btn-primary btn-sm" id="btn_users_more"> Ver todos los usuarios / pacientes</button>
             </div>
 
             <!-- Seccion de contadores -->

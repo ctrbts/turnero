@@ -52,14 +52,14 @@
 <!-- Encabezado HTML -->
 <?php  $HtmlViewsController->IncludeViews(array("HtmlTopHeader","HtmlHeader"));?>
 <!-- Titulo de pagina web -->
-    <title>Agregar Nueva Forma</title>
+    <title>Agregar nuevo formulario</title>
 <?php  $HtmlViewsController->IncludeViews(array("HtmlBody"));?>
 <?php include("../../inModuleMenu.php"); ?>
 <!-- Contenido -->
 <div class="p-3">
     <div class="mt-3 mb-3">
         <span class="lead" style="font-size:42px;">
-            Agregar Nueva Forma
+            Agregar nuevo formulario
         </span>
         <span class="lead">
             <p>

@@ -31,14 +31,14 @@ $year = date('Y', $fecha);
     </div>
     <div class="table-responsive" id="calendar-max">
         <form id="form_110" class="appnitro" method="post" action="addReglaHrs.php">
-            <div>
+            <!-- <div>
                 <table style="width: 100%" id="controlbuttons">
                     <tr>
                         <td class="text-left p-1"><a class="btn bn-sm btn-success" href="prevmonth">Mes Anterior</a></td>
                         <td class="text-right p-1"><a class="btn bn-sm btn-success" href="nextmonth">Siguiente Mes</a></td>
                     </tr>
                 </table>
-            </div>
+            </div> -->
             <div id="contentdiv"></div>
         </form>
     </div>

@@ -150,7 +150,8 @@ while ($day_num <= $days_in_month) {
 
     $message = "";
     if ($c > 0) {
-        $message = "<br><a class='btn btn-sm btn-warning px-3 py-2 shadow' id=\"ProgamaCita\" href=\"$pageRequest?v=$val\">Turnos disponibles ($c)</a><br/>";
+        //$message = "<br><a class='btn btn-sm btn-warning px-3 py-2 shadow' id=\"ProgamaCita\" href=\"$pageRequest?v=$val\">Turnos disponibles ($c)</a><br/>";
+        $message = "<br><a class='btn btn-sm btn-warning px-3 py-2 shadow-sm' id=\"ProgamaCita\" href=\"$pageRequest?v=$val\">Turnos disponibles</a><br/>";
     } else {
         $message = "<br>";
     }

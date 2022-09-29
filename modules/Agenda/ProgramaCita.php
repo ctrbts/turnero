@@ -53,7 +53,7 @@ $c = count($l->array);
                     ?>
                 </ul>
                 <div class="mt-3 mb-4">
-                    <button type="submit" class="btn btn-success btn-lg">Siguiente ></button>
+                    <button type="submit" class="btn btn-success btn-lg">Siguiente</button>
                 </div>
             </div>
 

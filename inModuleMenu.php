@@ -44,15 +44,19 @@ if (isset($_SESSION['Show_login'])) {
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow">
         <!-- Boton de inicio -->
         <?php if ($showUserMenu) { ?>
-            <a class="navbar-brand" href="<?php echo $config->domain . $direccion ?>/"><span>Inicio</span></a>
+            <a class="navbar-brand" href="<?php echo $config->domain . $direccion ?>/"><span>Turnero FOLP</span></a>
         <?php } else { ?>
-            <a class="navbar-brand" href="<?php echo $config->domain . $direccion ?>"><span>Inicio</span></a>
+            <a class="navbar-brand" href="<?php echo $config->domain . $direccion ?>"><span>Turnero FOLP</span></a>
         <?php } ?>
 
         <!-- Boton de toggle -->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+
+        &nbsp;&nbsp;&nbsp;
+        <a class="btn btn-success" href="<?php echo $config->domain . $direccion ?>/modules/Agenda/ViewAgenda.php"><span>Nuevo turno</span></a>
+        &nbsp;&nbsp;&nbsp;
 
         <!-- inicia menu -->
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
